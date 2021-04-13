@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient
 class LibraryDB {
 
     constructor() {
-            MongoClient.connect('mongodb://127.0.0.1:27017', { useUnifiedTopology: true })
+        MongoClient.connect('mongodb://127.0.0.1:27017', { useUnifiedTopology: true })
             .catch(err => console.error(err))
             .then((client) => {
                 this.db = client.db('library')

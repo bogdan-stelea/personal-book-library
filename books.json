@@ -1,0 +1,107 @@
+[{
+  "_id": "9789734630875",
+  "isbn": "9789734630875",
+  "title": "Ramasitele zilei",
+  "author": "KAZUO ISHIGURO",
+  "shortDescription": "Aparut in Anglia, in 1989, romanul a primit in acelasi an prestigiosul Booker Prize si a fost transpus cinematografic",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/9789734630875-2023018.jpg",
+  "categories": [
+    "Thriller"
+  ],
+  "rating": 1,
+  "starRating": 3
+},{
+  "_id": "9786067560121",
+  "isbn": "9786067560121",
+  "title": "Tarotul Rider Waite",
+  "author": "ARTHUR EDWARD WAITE",
+  "shortDescription": "În secolul XV, cărţile de Tarot erau desenate sau pictate manual pentru casele princiare din nordul Italiei şi din Franţa. Mai târziu, pachetele cu cărţi de joc au început să se răspândească din ce în ce mai mult, fiind reproduse prin tehnici de gravare industrială. În secolul XVI a devenit foarte popular un pachet cu cărţi de Tarot numit Tarotul marseillez.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/456146-0-240.jpg",
+  "categories": [
+    "Historical",
+    "Thriller"
+  ],
+  "rating": -1,
+  "starRating": 1
+},{
+  "_id": "9789734648887",
+  "isbn": "9789734648887",
+  "title": "Sapiens. Scurta istorie a omenirii",
+  "author": "YUVAL NOAH HARARI",
+  "shortDescription": "Publicată iniţial în Israel în 2011, Sapiens a devenit rapid bestseller internaţional, fiind tradusă în peste patruzeci de limbi.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/1983201-0-240.jpeg",
+  "categories": [
+    "Historical",
+    "Thriller"
+  ],
+  "rating": 1,
+  "starRating": 4
+},{
+  "_id": "9781838953850",
+  "isbn": "9781838953850",
+  "title": "The Florentines",
+  "author": "PAUL STRATHERN",
+  "shortDescription": "Between the birth of Dante in 1265 and the death of Galileo in 1642 something happened which completely revolutionized Western civilization. Painting, sculpture and architecture would all visibly change in a striking fashion.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/974306313-0-240.gif",
+  "categories": [
+    "Historical",
+    "Sci-Fi",
+    "Crime"
+  ],
+  "rating": 0,
+  "starRating": 0
+},{
+  "_id": "9786063371325",
+  "isbn": "9786063371325",
+  "title": "Scoala animalelor magice. Lumina, va rog!",
+  "author": "MARGIT AUER",
+  "shortDescription": "ACEASTĂ ȘCOALĂ ASCUNDE UN SECRET: Cine are noroc își va găsi aici cel mai bun prieten care există pe lume. Un animal magic. Un animal care poate să vorbească. Cu condiția să fie al tău...",
+  "imageUrl": "",
+  "categories": [
+    ""
+  ],
+  "rating": 0,
+  "starRating": -1
+},{
+  "_id": "9786063368363",
+  "isbn": "9786063368363",
+  "title": "Cei trei muschetari",
+  "author": "ALEXANDRE DUMAS",
+  "shortDescription": "Tânărul d’Artagnan sosește la Paris pentru a se alătura vestitului corp de gardă al regelui, dar constată aproape imediat că, din cauza firii sale impetuoase, ar trebui să se dueleze chiar cu unii dintre bărbații cărora a venit să le jure loialitate – Athos, Porthos și Aramis, trei prieteni inseparabili, cei trei muschetari.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/1093427677-0-240.jpeg",
+  "categories": [
+    "Historical",
+    "Crime",
+    "Police"
+  ],
+  "rating": 1,
+  "starRating": 3
+},{
+  "_id": "9786063368936",
+  "isbn": "9786063368936",
+  "title": "Iubita comandantului",
+  "author": "PAM JENOFF",
+  "shortDescription": "Emma Bau, o tânără în vârstă de 19 ani, e măritată de doar trei săptămâni atunci când tancurile naziste invadează Polonia.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/1003851849-0-240.webp",
+  "categories": [
+    "Police",
+    "Thriller",
+    "Historical"
+  ],
+  "rating": 0,
+  "starRating": 3
+},{
+  "_id": "9786063369469",
+  "isbn": "9786063369469",
+  "title": "Cele patru vanturi",
+  "author": "KRISTIN HANNAH",
+  "shortDescription": "Texas, 1934. Milioane de oameni sunt șomeri și seceta a nenorocit Marile Câmpii. Fermierii se luptă să-și păstreze pământurile și gospodăriile, în timp ce recoltele le sunt decimate, apa e pe punctul de a seca, iar praful amenință să-i îngroape cu totul.",
+  "imageUrl": "https://cdn.dc5.ro/img-prod/1021967095-0.webp",
+  "categories": [
+    "Thriller",
+    "Crime",
+    "Police"
+  ],
+  "rating": -1,
+  "starRating": 0
+}]

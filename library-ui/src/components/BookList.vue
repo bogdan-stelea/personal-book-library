@@ -1,40 +1,73 @@
 <template>
-  <div class="d-flex justify-content-between mb-4">
-    <label for="search"></label>
-    <input id="search" type="text" v-model="searchText" placeholder="Search..." @input="search">
-    <button type="button" class="btn btn-outline-secondary" @click="sort(1)">
-      <i v-if="!titleSortDir" class="bi bi-arrow-down"></i>
-      <i v-if="titleSortDir" class="bi bi-arrow-up"></i>
-      Title
-    </button>
-    <button type="button" class="btn btn-outline-secondary" @click="sort(2)">
-      <i v-if="!authorSortDir" class="bi bi-arrow-down"></i>
-      <i v-if="authorSortDir" class="bi bi-arrow-up"></i>
-      Author
-    </button>
-    <BookModal :bookToEdit="bookToEdit" @addBook="addBook" @editedBook="editedBook"
-               @showModal="toggleModal"></BookModal>
+  <div class="row">
+    <div class="d-flex justify-content-between mb-2">
+      <div class="d-flex">
+        <input id="search"
+               type="text"
+               class="form-control"
+               v-model="searchText"
+               placeholder="Search..."
+               @input="search"
+               style="border-right: none; border-radius: 5px 0 0 5px">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="border: 1px solid #ced4da; border-radius: 0 5px 5px 0">
+            {{ category ? category : 'All' }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a class="dropdown-item" href="#" @click="category = ''">All</a>
+            </li>
+            <li v-for="selectCategory in allCategories" @click="category = selectCategory.name">
+              <a class="dropdown-item"
+                 href="#">
+                {{ selectCategory.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex ms-2">
+          <button type="button" class="btn me-2 d-flex" @click="sort(1)">
+            <i v-if="sortVal === 1" class="bi bi-arrow-down"></i>
+            <i v-if="sortVal === 2" class="bi bi-arrow-up"></i>
+            Title
+          </button>
+          <button type="button" class="btn me-2 d-flex" @click="sort(2)">
+            <i v-if="sortVal === 3" class="bi bi-arrow-down"></i>
+            <i v-if="sortVal === 4" class="bi bi-arrow-up"></i>
+            Author
+          </button>
+        </div>
+      </div>
+      <BookModal :bookToEdit="bookToEdit"
+                 :all-categories="allCategories"
+                 @addBook="addBook"
+                 @editedBook="editedBook"
+                 @showModal="toggleModal"></BookModal>
+    </div>
   </div>
 
   <div v-if="$route.query.category" class="text-center">{{ $route.query.category }}</div>
-
-  <div v-if="filteredBooks.length === 0" class="text-center">No books</div>
+  <h4 v-if="filteredBooks.length === 0" class="text-center mt-5">No books</h4>
 
   <div class="row">
-    <div v-for="(book, index) in filteredBooks" :key="book.isbn" class="col-md-4 p-2">
-      <div class="card w-100 h-100">
-        <div class="card-body d-flex flex-column justify-content-end">
-          <BookCard :book="book" @deleteBook="deleteBook" @editBook="editBook(index)" @setRating="setRating(index, $event)"
-                    @setStarRating="setStarRating(index, $event)"></BookCard>
-        </div>
-      </div>
+    <div v-for="(book, index) in filteredBooks" :key="book.isbn" class="col-md-3 py-2">
+      <BookCard :book="book"
+                @editBook="editBook(index)"
+                @deleteBook="deleteBook"
+                @setStarRating="setStarRating(index, $event)"
+                @setRating="setRating(index, $event)"></BookCard>
     </div>
   </div>
 </template>
 
 <script>
 import BookCard from './BookCard'
-import { deleteBook, editRating, editStarRating, fetchBooks } from "../services/library.service";
+import { deleteBook, editRating, editStarRating, fetchBooks, getCategories } from "../services/library.service";
 import BookModal from "./BookModal";
 
 export default {
@@ -47,49 +80,52 @@ export default {
     return {
       books: [],
       filteredBooks: [],
-      titleSortDir: false,
-      authorSortDir: false,
+      sortVal: 0,
       searchText: '',
       bookToEdit: null,
-      modal: null
+      modal: null,
+      category: '',
+      allCategories: []
     }
   },
   async created() {
     this.books = await fetchBooks()
+    this.allCategories = await getCategories()
     this.modal = new bootstrap.Modal(document.getElementById("exampleModal"), {})
     this.filterIfCategory()
   },
   watch: {
-    $route() {
+    category() {
       this.filterIfCategory()
     }
   },
   methods: {
     filterIfCategory() {
-      const category = this.$route.query.category
-      if (!category) {
+      if (!this.category) {
         this.filteredBooks = this.books
         return
       }
-      this.filteredBooks = this.books.filter(book => book.categories.includes(category))
+      this.filteredBooks = this.books.filter(book => book.categories.includes(this.category))
     },
     sort(sortBy) {
       switch (sortBy) {
         case 1:
-          if (!this.titleSortDir) {
-            this.filteredBooks.sort((a, b) => a.title.localeCompare(b.title))
-          } else {
+          if (this.sortVal === 1) {
             this.filteredBooks.sort((a, b) => b.title.localeCompare(a.title))
+            this.sortVal = 2
+          } else {
+            this.filteredBooks.sort((a, b) => a.title.localeCompare(b.title))
+            this.sortVal = 1
           }
-          this.titleSortDir = !this.titleSortDir
           break
         case 2:
-          if (!this.authorSortDir) {
-            this.filteredBooks.sort((a, b) => a.author.localeCompare(b.author))
-          } else {
+          if (this.sortVal === 3) {
             this.filteredBooks.sort((a, b) => b.author.localeCompare(a.author))
+            this.sortVal = 4
+          } else {
+            this.filteredBooks.sort((a, b) => a.author.localeCompare(b.author))
+            this.sortVal = 3
           }
-          this.authorSortDir = !this.authorSortDir
           break
       }
     },
@@ -98,6 +134,10 @@ export default {
       this.search()
     },
     async deleteBook(isbn) {
+      const book = this.books.find(book => book.isbn === isbn)
+      if (!confirm(`Are sure you want to delete ${ book.title }?`)) {
+        return
+      }
       await deleteBook(isbn)
       this.books = this.books.filter(book => book.isbn !== isbn)
       this.search()

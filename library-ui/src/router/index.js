@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Books from '../components/Books.vue'
-import Categories from "../components/Categories";
+import Books from '../screens/Books.vue'
 
 const routes = [
     {
@@ -11,11 +10,6 @@ const routes = [
         path: '/books',
         name: 'Books',
         component: Books
-    },
-    {
-        path: '/categories',
-        name: 'Categories',
-        component: Categories
     },
     {
         path: '/**',

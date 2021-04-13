@@ -1,7 +1,6 @@
 <template>
   <nav class="navbar">
-    <router-link to="/books" class="navbar-elem" active-class="active">Books</router-link>
-    <router-link to="/categories" class="navbar-elem" active-class="active">Categories</router-link>
+    <h2 class="m-3">Book library</h2>
   </nav>
 </template>
 
@@ -22,22 +21,6 @@ export default {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-.navbar-elem {
-  padding: 0.5rem 2rem;
-  margin: 1rem;
-  font-size: 24px;
-  color: grey;
-  cursor: pointer;
-}
-
-.navbar-elem:hover {
-  color: #007bff;
-}
-
-.navbar-elem.active {
-  color: #007bff;
 }
 
 
