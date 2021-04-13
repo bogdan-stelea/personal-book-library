@@ -18,6 +18,7 @@
 
 import StarRating from "./StarRating";
 import Rating from "./Rating";
+
 export default {
   name: "BookCard",
   components: {Rating, StarRating},

@@ -1,6 +1,5 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" class="navbar-elem" active-class="active" exact>Home</router-link>
     <router-link to="/books" class="navbar-elem" active-class="active">Books</router-link>
     <router-link to="/categories" class="navbar-elem" active-class="active">Categories</router-link>
   </nav>
@@ -13,10 +12,6 @@ export default {
 </script>
 
 <style scoped>
-.active {
-  color: #007bff;
-}
-
 .navbar {
   display: flex;
   justify-content: center;

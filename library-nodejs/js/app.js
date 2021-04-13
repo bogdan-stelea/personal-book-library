@@ -11,12 +11,14 @@ const LibraryService = require('./services/library-service')
 
 let libraryService = new LibraryService()
 
-app.get('/library/books', (req, res) => {
-    res.send(libraryService.getBooksMap())
+// Books endpoints
+
+app.get('/library/books', async (req, res) => {
+    res.send(await libraryService.getBooks())
 })
 
-app.get('/library/books/:isbn', (req, res) => {
-    res.send(libraryService.getBook(req.params.isbn))
+app.get('/library/books/:isbn', async (req, res) => {
+    res.send(await libraryService.getBook(req.params.isbn))
 })
 
 app.post('/library/books', (req, res) => {
@@ -38,10 +40,23 @@ app.put('/library/books/star-rating', (req, res) => {
 })
 
 app.delete('/library/books/:isbn', (req, res) => {
-    res.send(libraryService.removeBook(req.params))
+    res.send(libraryService.removeBook(req.params.isbn))
+})
+
+// Categories endpoints
+
+app.get('/library/categories', async (req, res) => {
+    res.send(await libraryService.getCategories())
+})
+
+app.post('/library/categories', async (req, res) => {
+    res.send(await libraryService.addCategory(req.body))
+})
+
+app.delete('/library/categories/:name', async (req, res) => {
+    res.send(await libraryService.removeCategory(req.params.name))
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Listening at http://localhost:${port}`)
 })
-

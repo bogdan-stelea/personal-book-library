@@ -1,6 +1,5 @@
 <template>
-
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between mb-4">
     <label for="search"></label>
     <input id="search" type="text" v-model="searchText" placeholder="Search..." @input="search">
     <button type="button" class="btn btn-outline-secondary" @click="sort(1)">
@@ -13,9 +12,13 @@
       <i v-if="authorSortDir" class="bi bi-arrow-up"></i>
       Author
     </button>
-    <BookModal :bookToEdit="bookToEdit" @addBook="addBook" @editBook="editBook"
+    <BookModal :bookToEdit="bookToEdit" @addBook="addBook" @editedBook="editedBook"
                @showModal="toggleModal"></BookModal>
   </div>
+
+  <div v-if="$route.query.category" class="text-center">{{ $route.query.category }}</div>
+
+  <div v-if="filteredBooks.length === 0" class="text-center">No books</div>
 
   <div class="row">
     <div v-for="(book, index) in filteredBooks" :key="book.isbn" class="col-md-4 p-2">
@@ -31,8 +34,8 @@
 
 <script>
 import BookCard from './BookCard'
-import { deleteBook, editRating, editStarRating, fetchBook, fetchBooks } from "../services/library.service";
-import BookModal from "./AddBook";
+import { deleteBook, editRating, editStarRating, fetchBooks } from "../services/library.service";
+import BookModal from "./BookModal";
 
 export default {
   name: "BookList",
@@ -47,14 +50,29 @@ export default {
       titleSortDir: false,
       authorSortDir: false,
       searchText: '',
-      bookToEdit: null
+      bookToEdit: null,
+      modal: null
     }
   },
   async created() {
     this.books = await fetchBooks()
-    this.filteredBooks = this.books
+    this.modal = new bootstrap.Modal(document.getElementById("exampleModal"), {})
+    this.filterIfCategory()
+  },
+  watch: {
+    $route() {
+      this.filterIfCategory()
+    }
   },
   methods: {
+    filterIfCategory() {
+      const category = this.$route.query.category
+      if (!category) {
+        this.filteredBooks = this.books
+        return
+      }
+      this.filteredBooks = this.books.filter(book => book.categories.includes(category))
+    },
     sort(sortBy) {
       switch (sortBy) {
         case 1:
@@ -86,7 +104,10 @@ export default {
     },
     async editBook(index) {
       this.bookToEdit = this.books[index]
-      new bootstrap.Modal(document.getElementById("exampleModal"), {}).show()
+      this.modal.show()
+    },
+    editedBook(editedBook) {
+      this.books[this.books.findIndex((book) => book.isbn === editedBook.isbn)] = editedBook
     },
     async setRating(index, rating) {
       await editRating(this.books[index].isbn, rating)
@@ -110,9 +131,7 @@ export default {
     },
     toggleModal(open) {
       this.bookToEdit = null
-      // TODO: trebuie sa retin asta intr-o variabila pentru ca se creeaza unele diferite si se suprapun (FUCK)
-      new bootstrap.Modal(document.getElementById("exampleModal"), {}).toggle()
-      // open ? new bootstrap.Modal(document.getElementById("exampleModal"), {}).show() : new bootstrap.Modal(document.getElementById("exampleModal"), {}).hide();
+      open ? this.modal.show() : this.modal.hide();
     }
   }
 }

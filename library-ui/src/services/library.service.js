@@ -30,16 +30,6 @@ export async function editBook(book) {
     return res.text()
 }
 
-export async function deleteBook(isbn) {
-    if (confirm('Are you sure?')) {
-        const res = await fetch(`http://localhost:3000/library/books/${ isbn }`, {
-            method: 'DELETE'
-        })
-        if (!(res.status === 200)) alert('Error deleting Book')
-        return res.text()
-    }
-}
-
 export async function editRating(isbn, rating) {
     const res = await fetch('http://localhost:3000/library/books/rating', {
         method: 'PUT',
@@ -66,4 +56,19 @@ export async function editStarRating(isbn, starRating) {
         })
     })
     return res.text()
+}
+
+export async function deleteBook(isbn) {
+    if (confirm('Are you sure?')) {
+        const res = await fetch(`http://localhost:3000/library/books/${ isbn }`, {
+            method: 'DELETE'
+        })
+        if (!(res.status === 200)) alert('Error deleting Book')
+        return res.text()
+    }
+}
+
+export async function getCategories() {
+    const res = await fetch('http://localhost:3000/library/categories')
+    return res.json()
 }
